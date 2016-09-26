@@ -84,20 +84,12 @@ var TouchableBounce = React.createClass({
     bounciness: number,
     callback?: ?Function
   ) {
-    if (Platform.OS === 'android') {
-      Animated.spring(this.state.scale, {
-        toValue: value,
-        velocity,
-        bounciness,
-        useNativeDriver: true,
-      }).start(callback);
-    } else if (Platform.OS === 'ios') {
-      Animated.spring(this.state.scale, {
-        toValue: value,
-        velocity,
-        bounciness,
-      }).start(callback);
-    }
+    Animated.spring(this.state.scale, {
+      toValue: value,
+      velocity,
+      bounciness,
+      useNativeDriver: Platform.OS === 'android',
+    }).start(callback);
   },
 
   /**
